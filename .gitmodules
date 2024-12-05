@@ -1,0 +1,6 @@
+[submodule "42libft"]
+	path = 42libft
+	url = git@github.com:usercrixus/42libft.git
+[submodule "push_swap_tester"]
+	path = push_swap_tester
+	url = git@github.com:SimonCROS/push_swap_tester.git
