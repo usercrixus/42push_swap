@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:21:55 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/05 17:37:33 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:47:05 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "./42libft/ft_base/libft.h"
 # include "./42libft/ft_math/ft_math.h"
+# include "./42libft/ft_gnl/ft_get_next_line.h"
 
 typedef struct s_int_list
 {
@@ -32,6 +35,8 @@ typedef struct s_way
 	int	way;
 }	t_way;
 
+// main
+int			populate_a(t_int_list **a, char **argv, int argc);
 //verify input
 int			is_verified_input(char **s, int size);
 //lis
