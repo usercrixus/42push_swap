@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:40:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/05 20:25:05 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:35:21 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,22 @@ void	swap(t_int_list **stack, char c, int verbose)
 	}
 }
 
+void	rooting_next(t_int_list *a, t_int_list *b, char *line)
+{
+	if (ft_strncmp(line, "sb", 3) == 0 && list_len(b, b->previous) > 1)
+			swap(b, 'b', 1);
+	else if (ft_strncmp(line, "sa", 3) == 0 && list_len(a, a->previous) > 1)
+		swap(a, 'a', 1);
+	else if (ft_strncmp(line, "ss", 3) == 0)
+	{
+		if (list_len(b, b->previous) > 1)
+			swap(b, 'x', 0);
+		if (list_len(a, a->previous) > 1)
+			swap(a, 'x', 0);
+		ft_putstr_fd('ss\n', 1);
+	}
+}
+
 void	rooting(t_int_list *a, t_int_list *b, char *line)
 {
 	if (ft_strncmp(line, "ra", 3) == 0)
@@ -65,16 +81,8 @@ void	rooting(t_int_list *a, t_int_list *b, char *line)
 		push(a, b, 'a', 1);
 	else if (ft_strncmp(line, "pb", 3) == 0)
 		push(b, a, 'b', 1);
-	else if (ft_strncmp(line, "sb", 3) == 0)
-		swap(b, 'b', 1);
-	else if (ft_strncmp(line, "sa", 3) == 0)
-		swap(a, 'a', 1);
-	else if (ft_strncmp(line, "ss", 3) == 0)
-	{
-		swap(b, 'x', 0);
-		swap(a, 'x', 0);
-		ft_putstr_fd('ss\n', 1);
-	}
+	else
+		rooting_next(a, b, line);
 }
 
 int	main(int argc, int **argv)
@@ -97,6 +105,7 @@ int	main(int argc, int **argv)
 	while (line)
 	{
 		rooting(a, b, line);
+		free(line);
 		line = get_next_line(fd);
 	}
 	if (is_sorted(a))
