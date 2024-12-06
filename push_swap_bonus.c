@@ -6,91 +6,89 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:40:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/05 20:35:21 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:58:50 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	is_sorted(t_int_list *a)
-{
-	t_int_list	*buffer;
-	t_int_list	*end;
-	int			i;
-
-	if (!a)
-		return (0);
-	buffer = a;
-	end = a->previous;
-	while (buffer != end)
-	{
-		if (buffer < buffer->next)
-			return (0);
-		buffer = buffer->next;
-	}
-	return (1);
-}
 
 void	swap(t_int_list **stack, char c, int verbose)
 {
 	t_int_list	*poped;
 	t_int_list	*insert;
 
-	poped = pop(stack);
-	insert = (*stack)->previous->previous;
-	push(&insert, &poped, c, 0);
-	if (verbose)
+	if (list_len(stack, &(*stack)->previous) > 1)
 	{
-		ft_putchar_fd('s', 1);
-		ft_putchar_fd(c, 1);
-		ft_putchar_fd('\n', 1);
+		poped = pop(stack);
+		insert = (*stack)->previous;
+		push(&insert, &poped, c, 0);
+		if (verbose)
+		{
+			ft_putchar_fd('s', 1);
+			ft_putchar_fd(c, 1);
+			ft_putchar_fd('\n', 1);
+		}
 	}
 }
 
-void	rooting_next(t_int_list *a, t_int_list *b, char *line)
+int	rooting_next(t_int_list **a, t_int_list **b, char *line)
 {
-	if (ft_strncmp(line, "sb", 3) == 0 && list_len(b, b->previous) > 1)
-			swap(b, 'b', 1);
-	else if (ft_strncmp(line, "sa", 3) == 0 && list_len(a, a->previous) > 1)
-		swap(a, 'a', 1);
-	else if (ft_strncmp(line, "ss", 3) == 0)
+	if (ft_strncmp(line, "sb\n", 4) == 0)
+		return (swap(b, 'b', 1), 1);
+	else if (ft_strncmp(line, "sa\n", 4) == 0)
+		return (swap(a, 'a', 1), 1);
+	else if (ft_strncmp(line, "ss\n", 4) == 0)
 	{
-		if (list_len(b, b->previous) > 1)
-			swap(b, 'x', 0);
-		if (list_len(a, a->previous) > 1)
-			swap(a, 'x', 0);
-		ft_putstr_fd('ss\n', 1);
+		swap(b, 'x', 0);
+		swap(a, 'x', 0);
+		ft_putstr_fd("ss\n", 1);
+		return (1);
 	}
+	return (0);
 }
 
-void	rooting(t_int_list *a, t_int_list *b, char *line)
+int	rooting(t_int_list **a, t_int_list **b, char *line)
 {
-	if (ft_strncmp(line, "ra", 3) == 0)
-		rotate(a, 'a');
-	else if (ft_strncmp(line, "rb", 3) == 0)
-		rotate(a, 'b');
-	else if (ft_strncmp(line, "rr", 3) == 0)
-		rr(a, b);
-	else if (ft_strncmp(line, "rra", 4) == 0)
-		rrotate(a, 'a');
-	else if (ft_strncmp(line, "rrb", 4) == 0)
-		rr(b, 'b');
-	else if (ft_strncmp(line, "rrr", 4) == 0)
-		rrr(a, b);
-	else if (ft_strncmp(line, "pa", 3) == 0)
-		push(a, b, 'a', 1);
-	else if (ft_strncmp(line, "pb", 3) == 0)
-		push(b, a, 'b', 1);
+	if (ft_strncmp(line, "ra\n", 4) == 0)
+		return (rotate(a, 'a'), 1);
+	else if (ft_strncmp(line, "rb\n", 4) == 0)
+		return (rotate(b, 'b'), 1);
+	else if (ft_strncmp(line, "rr\n", 4) == 0)
+		return (rr(a, b), 1);
+	else if (ft_strncmp(line, "rra\n", 5) == 0)
+		return (rrotate(a, 'a'), 1);
+	else if (ft_strncmp(line, "rrb\n", 5) == 0)
+		return (rrotate(b, 'b'), 1);
+	else if (ft_strncmp(line, "rrr\n", 5) == 0)
+		return (rrr(a, b), 1);
+	else if (ft_strncmp(line, "pa\n", 4) == 0)
+		return (push(a, b, 'a', 1), 1);
+	else if (ft_strncmp(line, "pb\n", 4) == 0)
+		return (push(b, a, 'b', 1), 1);
 	else
-		rooting_next(a, b, line);
+		return (rooting_next(a, b, line));
+	return (0);
 }
 
-int	main(int argc, int **argv)
+int	manage_stdin(t_int_list **a, t_int_list **b)
+{
+	char	*line;
+
+	line = get_next_line(STDIN_FILENO);
+	while (line)
+	{
+		if (!rooting(a, b, line))
+			return (free(line), 0);
+		free(line);
+		line = get_next_line(STDIN_FILENO);
+	}
+	return (1);
+}
+
+int	main(int argc, char **argv)
 {
 	t_int_list		*a;
 	t_int_list		*b;
-	char			*line;
-	int				fd;
 
 	if (argc < 1)
 		return (1);
@@ -100,17 +98,13 @@ int	main(int argc, int **argv)
 	b = 0;
 	if (!populate_a(&a, &argv[1], argc - 1))
 		return (ft_putendl_fd("Error", 2), 1);
-	fd = fopen(STDIN_FILENO, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		rooting(a, b, line);
-		free(line);
-		line = get_next_line(fd);
-	}
+	if (!manage_stdin(&a, &b))
+		return (ft_putendl_fd("Error", 2), 1);
 	if (is_sorted(a))
 		ft_putstr_fd("OK", 1);
 	else
 		ft_putstr_fd("KO", 1);
-	return (free(line), close(fd), 0);
+	close_project(a);
+	close_project(b);
+	return (0);
 }

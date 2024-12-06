@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:23:46 by achaisne          #+#    #+#             */
-/*   Updated: 2024/11/30 05:26:28 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:53:22 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,23 @@ t_int_list	*get_maximum(t_int_list *a)
 		buffer = buffer->next;
 	}
 	return (buffer);
+}
+
+int	is_sorted(t_int_list *a)
+{
+	t_int_list	*buffer;
+	t_int_list	*end;
+	int			i;
+
+	if (!a)
+		return (0);
+	buffer = a;
+	end = a->previous;
+	while (buffer != end)
+	{
+		if (buffer->c < buffer->next->c)
+			return (0);
+		buffer = buffer->next;
+	}
+	return (1);
 }

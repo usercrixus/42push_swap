@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:21:55 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/05 19:47:05 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:07:06 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ typedef struct s_way
 	int	way;
 }	t_way;
 
-// main
+// main helper
 int			populate_a(t_int_list **a, char **argv, int argc);
+void		close_project(t_int_list *a);
 //verify input
 int			is_verified_input(char **s, int size);
 //lis
@@ -57,6 +58,7 @@ t_int_list	*get_maximum(t_int_list *a);
 int			list_len(t_int_list **start, t_int_list **end);
 int			is_min(t_int_list *a, int x);
 int			is_max(t_int_list *a, int x);
+int			is_sorted(t_int_list *a);
 // normalize
 int			normalize(t_int_list **a, char **tab, int size);
 // action
