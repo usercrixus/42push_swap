@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:16:42 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/03 18:59:18 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:10:42 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	is_integer(char *s)
 {
 	int	i;
 
+	if (!s)
+		return (0);
 	i = 0;
 	if (s[i] == '-')
 	{
@@ -43,6 +45,8 @@ int	is_integers(char **s, int size)
 	int	i;
 	int	j;
 
+	if (!s)
+		return (0);
 	j = 0;
 	while (j < size)
 	{
@@ -58,6 +62,8 @@ int	is_double(char **s, int size)
 	int	i;
 	int	j;
 
+	if (!s)
+		return (0);
 	j = 0;
 	while (j < size - 1)
 	{
@@ -75,6 +81,8 @@ int	is_double(char **s, int size)
 
 int	is_verified_input(char **s, int size)
 {
+	if (!s)
+		return (0);
 	if (!is_integers(s, size) || is_double(s, size))
 		return (0);
 	return (1);

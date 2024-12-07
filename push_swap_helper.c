@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:23:46 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/07 03:48:57 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:03:08 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	list_len(t_int_list **start, t_int_list **end)
 	t_int_list	*buffer;
 	int			i;
 
-	if (!(*start))
+	if (!*start || !*end)
 		return (0);
 	i = 1;
 	buffer = *start;
@@ -34,6 +34,8 @@ int	is_min(t_int_list *a, int x)
 	t_int_list	*end;
 	t_int_list	*buffer;
 
+	if (!a)
+		return (1);
 	end = a->previous;
 	buffer = a;
 	while (buffer != end)
@@ -52,6 +54,8 @@ int	is_max(t_int_list *a, int x)
 	t_int_list	*end;
 	t_int_list	*buffer;
 
+	if (!a)
+		return (1);
 	end = a->previous;
 	buffer = a;
 	while (buffer != end)
@@ -69,6 +73,8 @@ t_int_list	*get_maximum(t_int_list *a)
 {
 	t_int_list	*buffer;
 
+	if (!a)
+		return (0);
 	buffer = a;
 	while (!is_max(a, buffer->c))
 	{

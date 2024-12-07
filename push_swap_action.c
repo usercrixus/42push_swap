@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 00:16:52 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/07 00:57:10 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:56:01 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,14 @@ void	push(t_int_list **pushed, t_int_list **poped, char c, int verbose)
 	t_int_list	*node_poped;
 
 	node_poped = pop(poped);
-	native_push(pushed, &node_poped);
-	if (verbose)
+	if (node_poped)
 	{
-		ft_putchar_fd('p', 1);
-		ft_putchar_fd(c, 1);
-		ft_putchar_fd('\n', 1);
+		native_push(pushed, &node_poped);
+		if (verbose)
+		{
+			ft_putchar_fd('p', 1);
+			ft_putchar_fd(c, 1);
+			ft_putchar_fd('\n', 1);
+		}
 	}
 }

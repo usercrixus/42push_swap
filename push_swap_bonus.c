@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:40:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/07 01:44:06 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:00:09 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ void	swap(t_int_list **stack, char c, int verbose)
 	if (list_len(stack, &(*stack)->previous) > 1)
 	{
 		poped = pop(stack);
-		ins = (*stack)->previous;
-		insert(&ins, &poped);
-		if (verbose)
+		if (poped)
 		{
-			ft_putchar_fd('s', 1);
-			ft_putchar_fd(c, 1);
-			ft_putchar_fd('\n', 1);
+			ins = (*stack)->previous;
+			insert(&ins, &poped);
+			if (verbose)
+			{
+				ft_putchar_fd('s', 1);
+				ft_putchar_fd(c, 1);
+				ft_putchar_fd('\n', 1);
+			}
 		}
 	}
 }

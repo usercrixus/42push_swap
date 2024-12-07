@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:21:48 by achaisne          #+#    #+#             */
-/*   Updated: 2024/11/30 18:10:22 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:54:05 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,41 @@ t_int_list	*pop(t_int_list **stack)
 
 void	native_push(t_int_list **stack, t_int_list **node)
 {
-	if (!*stack)
+	if (*node)
 	{
-		*stack = *node;
-		(*stack)->next = *stack;
-		(*stack)->previous = *stack;
-	}
-	else
-	{
-		(*node)->next = *stack;
-		(*node)->previous = (*stack)->previous;
-		(*stack)->previous->next = *node;
-		(*stack)->previous = *node;
+		if (!*stack)
+		{
+			*stack = *node;
+			(*stack)->next = *stack;
+			(*stack)->previous = *stack;
+		}
+		else
+		{
+			(*node)->next = *stack;
+			(*node)->previous = (*stack)->previous;
+			(*stack)->previous->next = *node;
+			(*stack)->previous = *node;
+		}
 	}
 }
 
 void	insert(t_int_list **stack, t_int_list **node)
 {
-	if (!*stack)
+	if (*node)
 	{
-		*stack = *node;
-		(*stack)->next = *stack;
-		(*stack)->previous = *stack;
-	}
-	else
-	{
-		(*node)->next = *stack;
-		(*node)->previous = (*stack)->previous;
-		(*stack)->previous->next = *node;
-		(*stack)->previous = *node;
-		*stack = *node;
+		if (!*stack)
+		{
+			*stack = *node;
+			(*stack)->next = *stack;
+			(*stack)->previous = *stack;
+		}
+		else
+		{
+			(*node)->next = *stack;
+			(*node)->previous = (*stack)->previous;
+			(*stack)->previous->next = *node;
+			(*stack)->previous = *node;
+			*stack = *node;
+		}
 	}
 }
