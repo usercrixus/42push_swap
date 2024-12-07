@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:21:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/06 15:06:29 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/07 03:49:14 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	b = 0;
 	if (!populate_a(&a, &argv[1], argc - 1))
 		return (ft_putendl_fd("Error", 2), 1);
-	if (!normalize(&a, argv, argc - 1))
+	if (!normalize(&a, &argv[1], argc - 1))
 		return (ft_putendl_fd("Error", 2), 1);
 	set_lis(a);
 	sort_brute_force(&b, &a, argc - 2);

@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:21:55 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/06 15:07:06 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/07 03:49:01 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,9 @@ int			is_sorted(t_int_list *a);
 int			normalize(t_int_list **a, char **tab, int size);
 // action
 void		push(t_int_list **pushed, t_int_list **poped, char c, int verbose);
-void		rotate(t_int_list **stack, char c);
-void		rrotate(t_int_list **stack, char c);
-void		rr(t_int_list **stacka, t_int_list **stackb);
-void		rrr(t_int_list **stacka, t_int_list **stackb);
-t_int_list	*pop(t_int_list **stack);
+void		rotate(t_int_list **stack, char c, int verbose);
+void		rrotate(t_int_list **stack, char c, int verbose);
+void		rr(t_int_list **stacka, t_int_list **stackb, int verbose);
+void		rrr(t_int_list **stacka, t_int_list **stackb, int verbose);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 00:12:48 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/01 18:29:15 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/07 02:10:04 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	depush_a(t_int_list **b, t_int_list **a, int max)
 	while (len)
 	{
 		if ((*a)->previous->lis == -1)
-			rotate(a, 'a');
+			rotate(a, 'a', 1);
 		else if ((*a)->previous->c >= max * 0.5)
 			push(b, a, 'b', 1);
 		else if ((*a)->previous->c <= max * 0.5)
 		{
 			push(b, a, 'b', 1);
-			rotate(b, 'b');
+			rotate(b, 'b', 1);
 		}
 		len--;
 	}

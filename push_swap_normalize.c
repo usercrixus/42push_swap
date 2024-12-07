@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:04:33 by achaisne          #+#    #+#             */
-/*   Updated: 2024/11/30 17:26:07 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/07 03:49:33 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	*populate_tab(char **tab, int size)
 	i = 0;
 	while (i < size)
 	{
-		list[i] = atoi(tab[i + 1]);
+		list[i] = atoi(tab[i]);
 		i++;
 	}
 	return (list);
@@ -54,31 +54,37 @@ void	sort_int(int *tab, int size)
 	}
 }
 
+void	set_buffer_value(t_int_list *buffer, int *list, int size)
+{
+	int			i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (buffer->c == list[i])
+			break ;
+		i++;
+	}
+	if (buffer->c == list[i])
+		buffer->c = i;
+}
+
 int	normalize(t_int_list **a, char **tab, int size)
 {
 	int			i;
 	int			*list;
 	t_int_list	*buffer;
-	t_int_list	*end;
 
 	list = populate_tab(tab, size);
 	if (!list)
 		return (0);
 	sort_int(list, size);
-	i = 0;
-	end = (*a)->previous;
-	while (i < size)
+	buffer = *a;
+	while (buffer != (*a)->previous)
 	{
-		buffer = *a;
-		while (buffer != end)
-		{
-			if (buffer->c == list[i])
-				break ;
-			buffer = buffer->next;
-		}
-		if (buffer->c == list[i])
-			buffer->c = i;
-		i++;
+		set_buffer_value(buffer, list, size);
+		buffer = buffer->next;
 	}
+	set_buffer_value(buffer, list, size);
 	return (free(list), 1);
 }

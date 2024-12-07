@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:40:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/06 15:58:50 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/07 01:44:06 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	swap(t_int_list **stack, char c, int verbose)
 {
 	t_int_list	*poped;
-	t_int_list	*insert;
+	t_int_list	*ins;
 
 	if (list_len(stack, &(*stack)->previous) > 1)
 	{
 		poped = pop(stack);
-		insert = (*stack)->previous;
-		push(&insert, &poped, c, 0);
+		ins = (*stack)->previous;
+		insert(&ins, &poped);
 		if (verbose)
 		{
 			ft_putchar_fd('s', 1);
@@ -34,14 +34,13 @@ void	swap(t_int_list **stack, char c, int verbose)
 int	rooting_next(t_int_list **a, t_int_list **b, char *line)
 {
 	if (ft_strncmp(line, "sb\n", 4) == 0)
-		return (swap(b, 'b', 1), 1);
+		return (swap(b, 'b', 0), 1);
 	else if (ft_strncmp(line, "sa\n", 4) == 0)
-		return (swap(a, 'a', 1), 1);
+		return (swap(a, 'a', 0), 1);
 	else if (ft_strncmp(line, "ss\n", 4) == 0)
 	{
 		swap(b, 'x', 0);
 		swap(a, 'x', 0);
-		ft_putstr_fd("ss\n", 1);
 		return (1);
 	}
 	return (0);
@@ -50,21 +49,21 @@ int	rooting_next(t_int_list **a, t_int_list **b, char *line)
 int	rooting(t_int_list **a, t_int_list **b, char *line)
 {
 	if (ft_strncmp(line, "ra\n", 4) == 0)
-		return (rotate(a, 'a'), 1);
+		return (rotate(a, 'a', 0), 1);
 	else if (ft_strncmp(line, "rb\n", 4) == 0)
-		return (rotate(b, 'b'), 1);
+		return (rotate(b, 'b', 0), 1);
 	else if (ft_strncmp(line, "rr\n", 4) == 0)
-		return (rr(a, b), 1);
+		return (rr(a, b, 0), 1);
 	else if (ft_strncmp(line, "rra\n", 5) == 0)
-		return (rrotate(a, 'a'), 1);
+		return (rrotate(a, 'a', 0), 1);
 	else if (ft_strncmp(line, "rrb\n", 5) == 0)
-		return (rrotate(b, 'b'), 1);
+		return (rrotate(b, 'b', 0), 1);
 	else if (ft_strncmp(line, "rrr\n", 5) == 0)
-		return (rrr(a, b), 1);
+		return (rrr(a, b, 0), 1);
 	else if (ft_strncmp(line, "pa\n", 4) == 0)
-		return (push(a, b, 'a', 1), 1);
+		return (push(a, b, 'a', 0), 1);
 	else if (ft_strncmp(line, "pb\n", 4) == 0)
-		return (push(b, a, 'b', 1), 1);
+		return (push(b, a, 'b', 0), 1);
 	else
 		return (rooting_next(a, b, line));
 	return (0);
@@ -101,9 +100,9 @@ int	main(int argc, char **argv)
 	if (!manage_stdin(&a, &b))
 		return (ft_putendl_fd("Error", 2), 1);
 	if (is_sorted(a))
-		ft_putstr_fd("OK", 1);
+		ft_putstr_fd("OK\n", 1);
 	else
-		ft_putstr_fd("KO", 1);
+		ft_putstr_fd("KO\n", 1);
 	close_project(a);
 	close_project(b);
 	return (0);
