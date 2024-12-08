@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:40:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/07 17:00:09 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:27:15 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,11 @@ int	main(int argc, char **argv)
 	if (!populate_a(&a, &argv[1], argc - 1))
 		return (ft_putendl_fd("Error", 2), 1);
 	if (!manage_stdin(&a, &b))
+	{
+		close_project(a);
+		close_project(b);
 		return (ft_putendl_fd("Error", 2), 1);
+	}
 	if (is_sorted(a))
 		ft_putstr_fd("OK\n", 1);
 	else
