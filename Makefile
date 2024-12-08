@@ -9,6 +9,8 @@ OBJS = \
 	push_swap_verify_input.o \
 	push_swap_normalize.o \
 	push_swap_main_helper.o \
+	push_swap_action2.o \
+	push_swap_sort_three.o \
 
 all: submodule push_swap_tester libft.a push_swap checker
 
