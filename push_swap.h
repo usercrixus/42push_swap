@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:21:55 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/08 18:25:34 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:10:17 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ void		rr(t_int_list **stacka, t_int_list **stackb, int verbose);
 void		rrr(t_int_list **stacka, t_int_list **stackb, int verbose);
 void		swap(t_int_list **stack, char c, int verbose);
 // sort three
-void		sort_three(t_int_list **stacks);
+void		sort_three(t_int_list **a);
 
 #endif
