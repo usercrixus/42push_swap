@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:40:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/08 15:27:15 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:49:06 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	main(int argc, char **argv)
 		close_project(b);
 		return (ft_putendl_fd("Error", 2), 1);
 	}
-	if (is_sorted(a))
+	if (is_sorted(a) && list_len(&b, &b->previous) == 0)
 		ft_putstr_fd("OK\n", 1);
 	else
 		ft_putstr_fd("KO\n", 1);

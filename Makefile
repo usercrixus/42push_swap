@@ -10,12 +10,12 @@ OBJS = \
 	push_swap_normalize.o \
 	push_swap_main_helper.o \
 
-all: submodule push_swap_tester libft.a push_swap push_swap_bonus
+all: submodule push_swap_tester libft.a push_swap checker
 
 push_swap: push_swap_main.o $(OBJS)
 	cc $^ -L./42libft/ft_base -lft -L./42libft/ft_math -lftmath -o $@
 
-push_swap_bonus: push_swap_bonus.o $(OBJS)
+checker: push_swap_bonus.o $(OBJS)
 	cc $^ -L./42libft/ft_base -lft -L./42libft/ft_math -lftmath -L./42libft/ft_gnl -lftgnl -o $@
 
 %.o: %.c \
@@ -36,10 +36,10 @@ clean:
 	make -C ./push_swap_tester clean
 
 fclean: clean
-	rm -f push_swap push_swap_bonus
+	rm -f push_swap checker
 	make -C ./42libft fclean
 	make -C ./push_swap_tester fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re push_swap_tester libft.a
+.PHONY: all clean fclean re push_swap_tester libft.a submodule
