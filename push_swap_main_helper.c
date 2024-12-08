@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:06:20 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/06 15:07:28 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:25:50 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,44 @@ void	close_project(t_int_list *a)
 	while (a)
 	{
 		free(pop(&a));
+	}
+}
+
+int	split_len(char **c)
+{
+	int	i;
+
+	i = 0;
+	while (c[i])
+		i++;
+	return (i);
+}
+
+void	free_split(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+}
+
+int	set_args(int *argc, char ***argv)
+{
+	if (*argc == 2)
+	{
+		*argv = ft_split((*argv)[1], ' ');
+		(*argc) = split_len(*argv);
+		return (1);
+	}
+	else
+	{
+		*argv = &(*argv)[1];
+		(*argc)--;
+		return (0);
 	}
 }

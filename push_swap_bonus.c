@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:40:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/08 18:15:31 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:27:45 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,14 @@ int	manage_stdin(t_int_list **a, t_int_list **b)
 	while (line)
 	{
 		if (!rooting(a, b, line))
-			return (free(line), 0);
+		{
+			while (line)
+			{
+				free(line);
+				line = get_next_line(STDIN_FILENO);
+			}
+			return (0);
+		}
 		free(line);
 		line = get_next_line(STDIN_FILENO);
 	}
@@ -67,28 +74,29 @@ int	manage_stdin(t_int_list **a, t_int_list **b)
 
 int	main(int argc, char **argv)
 {
-	t_int_list		*a;
-	t_int_list		*b;
+	t_int_list	*a;
+	t_int_list	*b;
+	int			is_alloc;
 
-	if (argc < 1)
+	if (argc < 2)
 		return (1);
-	if (!is_verified_input(argv + 1, argc - 1))
+	is_alloc = set_args(&argc, &argv);
+	if (!is_verified_input(argv, argc))
 		return (ft_putendl_fd("Error", 2), 1);
 	a = 0;
 	b = 0;
-	if (!populate_a(&a, &argv[1], argc - 1))
+	if (!populate_a(&a, argv, argc))
 		return (ft_putendl_fd("Error", 2), 1);
 	if (!manage_stdin(&a, &b))
 	{
 		close_project(a);
-		close_project(b);
-		return (ft_putendl_fd("Error", 2), 1);
+		return (close_project(b), ft_putendl_fd("Error", 2), 1);
 	}
 	if (is_sorted(a) && list_len(&b, &b->previous) == 0)
 		ft_putstr_fd("OK\n", 1);
 	else
 		ft_putstr_fd("KO\n", 1);
-	close_project(a);
-	close_project(b);
-	return (0);
+	if (is_alloc)
+		free_split(argv);
+	return (close_project(a), close_project(b), 0);
 }
