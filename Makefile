@@ -12,10 +12,10 @@ OBJS = \
 
 all: submodule push_swap_tester libft.a push_swap push_swap_bonus
 
-push_swap: push_swap_main.c $(OBJS)
+push_swap: push_swap_main.o $(OBJS)
 	cc $^ -L./42libft/ft_base -lft -L./42libft/ft_math -lftmath -o $@
 
-push_swap_bonus: push_swap_bonus.c $(OBJS)
+push_swap_bonus: push_swap_bonus.o $(OBJS)
 	cc $^ -L./42libft/ft_base -lft -L./42libft/ft_math -lftmath -L./42libft/ft_gnl -lftgnl -o $@
 
 %.o: %.c \
@@ -31,7 +31,7 @@ push_swap_tester:
 	make -C ./push_swap_tester
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) push_swap_main.o push_swap_bonus.o
 	make -C ./42libft clean
 	make -C ./push_swap_tester clean
 

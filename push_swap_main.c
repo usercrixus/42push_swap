@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:21:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/07 03:49:14 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:32:22 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_int_list		*a;
 	t_int_list		*b;
-	int				*list;
-	int				i;
 
 	if (argc < 2)
 		return (1);
