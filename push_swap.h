@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:21:55 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/08 20:14:45 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:19:05 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_way
 int			populate_a(t_int_list **a, char **argv, int argc);
 void		close_project(t_int_list *a);
 int			set_args(int *argc, char ***argv);
-void		free_split(char **argv);
+void		free_split(char **argv, int is_alloc);
 //verify input
 int			is_verified_input(char **s, int size);
 //lis

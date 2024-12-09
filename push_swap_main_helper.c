@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:06:20 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/08 20:25:50 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:18:16 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,20 @@ int	split_len(char **c)
 	return (i);
 }
 
-void	free_split(char **argv)
+void	free_split(char **argv, int is_alloc)
 {
 	int	i;
 
-	i = 0;
-	while (argv[i])
+	if (is_alloc)
 	{
-		free(argv[i]);
-		i++;
+		i = 0;
+		while (argv[i])
+		{
+			free(argv[i]);
+			i++;
+		}
+		free(argv);
 	}
-	free(argv);
 }
 
 int	set_args(int *argc, char ***argv)

@@ -16,6 +16,7 @@
         "functional": "c",
         "tuple": "c",
         "random": "c",
-        "ft_str.h": "c"
+        "ft_str.h": "c",
+        "libft.h": "c"
     }
 }
