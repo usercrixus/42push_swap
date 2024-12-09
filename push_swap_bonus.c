@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:40:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/09 13:39:52 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:58:24 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,8 @@ int	manage_stdin(t_int_list **a, t_int_list **b)
 	{
 		if (!rooting(a, b, line))
 		{
-			while (line)
-			{
-				free(line);
-				line = get_next_line(STDIN_FILENO);
-			}
+			free(line);
+			get_next_line(~STDIN_FILENO);
 			return (0);
 		}
 		free(line);
