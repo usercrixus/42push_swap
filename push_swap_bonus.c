@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:40:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/09 13:58:24 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:21:57 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,11 @@ int	main(int argc, char **argv)
 	if (!populate_a(&a, argv, argc))
 		return (free_split(argv, alloc), ft_putendl_fd("Error", 2), 1);
 	if (!manage_stdin(&a, &b))
-	{
-		free_split(argv, alloc);
-		close_project(a);
-		return (close_project(b), ft_putendl_fd("Error", 2), 1);
-	}
+		return (free_split(argv, alloc), close_project(a),
+			close_project(b), ft_putendl_fd("Error", 2), 1);
 	if (is_sorted(a) && list_len(&b, &b->previous) == 0)
 		ft_putstr_fd("OK\n", 1);
 	else
 		ft_putstr_fd("KO\n", 1);
-	free_split(argv, alloc);
-	return (close_project(a), close_project(b), 0);
+	return (free_split(argv, alloc), close_project(a), close_project(b), 0);
 }

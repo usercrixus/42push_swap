@@ -6,7 +6,7 @@
 /*   By: achaisne <achaisne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:21:51 by achaisne          #+#    #+#             */
-/*   Updated: 2024/12/09 13:29:09 by achaisne         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:29:47 by achaisne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,5 @@ int	main(int argc, char **argv)
 		return (free_split(argv, alloc), ft_putendl_fd("Error", 2), 1);
 	set_lis(a);
 	sort_brute_force(&b, &a, argc - 1);
-	free_split(argv, alloc);
-	close_project(a);
-	return (0);
+	return (free_split(argv, alloc), close_project(a), 0);
 }
