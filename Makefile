@@ -46,4 +46,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re push_swap_tester libft.a submodule
+.PHONY: all bonus clean fclean re push_swap_tester libft.a submodule
