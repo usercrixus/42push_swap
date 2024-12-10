@@ -12,7 +12,9 @@ OBJS = \
 	push_swap_action2.o \
 	push_swap_sort_three.o \
 
-all: submodule push_swap_tester libft.a push_swap checker
+all: submodule push_swap_tester libft.a push_swap
+
+bonus: submodule libft.a checker
 
 push_swap: push_swap_main.o $(OBJS)
 	cc $^ -L./42libft/ft_base -lft -L./42libft/ft_math -lftmath -o $@
